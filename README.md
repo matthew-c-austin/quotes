@@ -5,7 +5,7 @@ This quotes app reads a "recentquotes.json" file located in the resources folder
 ### Team
 
 - **Matt Austin**
-- **XXX**
+- **Andrew Vreeland**
 - 
 ### Instructions
 
