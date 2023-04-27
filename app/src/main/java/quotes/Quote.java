@@ -3,18 +3,22 @@ package quotes;
 public class Quote
 {
     // Fields
+    // TODO: Delete tags and likes from all functions and tests. We won't be using them.
     private String[] tags;
     private String author;
     private String likes;
     private String text;
 
-    // Constructor
+    // Constructor for the .json files
     public Quote(String[] tags, String author, String likes, String text) {
         this.tags = tags;
         this.author = author;
         this.likes = likes;
         this.text = text;
     }
+
+    // Constructor for the Formismatic API
+    // TODO: Create constructor for the API version of the quotes
 
     // Getters and Setters
     public String[] getTags() {

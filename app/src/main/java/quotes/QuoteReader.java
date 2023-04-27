@@ -36,6 +36,8 @@ public class QuoteReader{
             return null;
         }
     }
+
+    // TODO: Incorporate the fetchApiQuote() into the method below, and create a new method getRandomQuoteFromFile() with the current logic below
     public Quote getRandomQuote(){
         if (this.quotes == null || this.quotes.isEmpty()) {
             return null;
@@ -44,6 +46,20 @@ public class QuoteReader{
         Random rand = new Random();
 
         return this.quotes.get(rand.nextInt(this.quotes.size()));
+    }
+
+    private Quote fetchApiQuote() throws IOException {
+        // TODO: Incorporate all the stuff from today's lecture into this method
+        return null;
+    }
+
+    private void cacheQuote(Quote quote) {
+        // TODO: Create cacheQuote function
+    }
+
+    private Quote getRandomQuoteFromFile() {
+        // TODO: Copy logic from getRandomQuote() into here
+        return null;
     }
 
     // Getters and Setters
