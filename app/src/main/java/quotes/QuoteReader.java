@@ -10,9 +10,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Random;
 
-public class QuoteReader {
-    // TODO: Implement QuoteReader Class
-    // properties
+public class QuoteReader{
+    // Fields
     private List<Quote> quotes;
     private File filePath;
 
@@ -27,17 +26,24 @@ public class QuoteReader {
         try (FileReader fileReader = new FileReader(this.filePath)) {
             Gson gson = new Gson();
             Type quotesType = new TypeToken<List<Quote>>() {}.getType();
+
             return gson.fromJson(fileReader, quotesType);
+
         } catch (IOException ioe){
             System.out.println("Caught an IOException with stack trace:");
             ioe.printStackTrace();
+
             return null;
         }
     }
-    private Quote getRandomQuote(){
+    public Quote getRandomQuote(){
+        if (this.quotes == null || this.quotes.isEmpty()) {
+            return null;
+        }
+
         Random rand = new Random();
-        Quote randQuote = quotes.get(rand.nextInt(quotes.size()));
-        return  randQuote;
+
+        return this.quotes.get(rand.nextInt(this.quotes.size()));
     }
 
     // Getters and Setters
