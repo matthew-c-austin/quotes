@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,6 @@ public class QuoteReaderTest {
         this.filePath = new File("src/test/resources/testQuote.json");
         this.sut = new QuoteReader(filePath);
     }
-
 
     @Test
     void testConstructor() throws IOException {
@@ -81,5 +79,15 @@ public class QuoteReaderTest {
         }
 
         System.out.println(ANSI_GREEN + "testReadQuotes() - test passed successfully" + ANSI_RESET);
+    }
+
+    @Test
+    void testReadQuotesInvalidFileContentReturnsNull() throws IOException{
+        File filePath = new File("src/test/resources/invalidTestQuotes.json");
+        QuoteReader sut = new QuoteReader(filePath);
+        List<Quote> actualQuotes = sut.getQuotes();
+        assertNull(actualQuotes);
+
+        System.out.println(ANSI_GREEN + "testReadQuotesInvalidFileContentReturnsNull() - test passed successfully" + ANSI_RESET);
     }
 }
