@@ -2,9 +2,7 @@ package quotes;
 
 public class Quote
 {
-
-
-    // properties
+    // Fields
     private String[] tags;
     private String author;
     private String likes;
