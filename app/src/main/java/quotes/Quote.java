@@ -3,46 +3,28 @@ package quotes;
 public class Quote
 {
     // Fields
-    // TODO: Delete tags and likes from all functions and tests. We won't be using them.
-    private String[] tags;
     private String author;
-    private String likes;
     private String text;
 
     // Constructor for the .json files
-    public Quote(String[] tags, String author, String likes, String text) {
-        this.tags = tags;
+    public Quote(String author, String text) {
         this.author = author;
-        this.likes = likes;
         this.text = text;
     }
 
-    // Constructor for the Formismatic API
-    // TODO: Create constructor for the API version of the quotes
+    // Constructor for the Formismatic API. We are forced to use more parameters in the constructor because were we to use the same number and type as the .json version, the compiler has no way of differentiating, even though we don't use the rest of the parameters.
+    public Quote(String quoteAuthor, String quoteText, String senderName, String senderLink, String quoteLink) {
+        this.author = quoteAuthor;
+        this.text = quoteText;
+    }
 
     // Getters and Setters
-    public String[] getTags() {
-        return tags;
-    }
-
-    public void setTags(String[] tags) {
-        this.tags = tags;
-    }
-
     public String getAuthor() {
         return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getLikes() {
-        return likes;
-    }
-
-    public void setLikes(String likes) {
-        this.likes = likes;
     }
 
     public String getText() {
