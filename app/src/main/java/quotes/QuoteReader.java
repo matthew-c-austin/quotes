@@ -52,7 +52,6 @@ public class QuoteReader{
     }
 
     protected Quote fetchApiQuote() throws IOException {
-        // TODO: Incorporate all the stuff from today's lecture into this method
         // step 1: create url, and a connection
         URL quoteUrl = new URL("http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en");
         HttpURLConnection quoteConnection = (HttpURLConnection) quoteUrl.openConnection();

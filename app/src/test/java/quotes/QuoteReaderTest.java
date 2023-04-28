@@ -80,4 +80,32 @@ public class QuoteReaderTest {
 
         System.out.println(ANSI_GREEN + "testReadQuotesInvalidFileContentReturnsNull() - test passed successfully" + ANSI_RESET);
     }
+
+    @Test
+    void testCacheQuote() throws IOException {
+        File filePath = new File("src/test/resources/cacheTestQuotes.json");
+        QuoteReader sut = new QuoteReader(filePath);
+        String author = "Louis Armstrong";
+        String text = "What we play is life.";
+        Quote quote = new Quote(author,text);
+        sut.cacheQuote(quote);
+
+        QuoteReader expectedQuoteReader = new QuoteReader(filePath);
+
+        List<Quote> actualQuotes = sut.getQuotes();
+        List<Quote> expectedQuotes = expectedQuoteReader.getQuotes();
+
+        assertEquals(expectedQuotes.size(), actualQuotes.size());
+
+        for (int i = 0; i < expectedQuotes.size(); i++) {
+            String expectedAuthor = expectedQuotes.get(i).getAuthor();
+            System.out.println(expectedAuthor);
+            String expectedText = expectedQuotes.get(i).getText();
+            System.out.println(expectedText);
+            assertEquals(expectedAuthor, actualQuotes.get(i).getAuthor());
+            assertEquals(expectedText, actualQuotes.get(i).getText());
+        }
+
+        System.out.println(ANSI_GREEN + "testCacheQuote() - test passed successfully" + ANSI_RESET);
+    }
 }
