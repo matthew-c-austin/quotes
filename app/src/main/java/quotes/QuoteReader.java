@@ -51,7 +51,7 @@ public class QuoteReader{
         }
     }
 
-    private Quote fetchApiQuote() throws IOException {
+    protected Quote fetchApiQuote() throws IOException {
         // TODO: Incorporate all the stuff from today's lecture into this method
         // step 1: create url, and a connection
         URL quoteUrl = new URL("http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en");
@@ -90,7 +90,7 @@ public class QuoteReader{
         return null;
     }
 
-    private void cacheQuote(Quote quote) throws IOException {
+    protected void cacheQuote(Quote quote) throws IOException {
         try (FileWriter writer = new FileWriter(this.filePath, StandardCharsets.UTF_16, false)) {
             this.quotes.add(quote);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -101,7 +101,7 @@ public class QuoteReader{
         }
     }
 
-    private Quote getRandomQuoteFromFile() {
+    protected Quote getRandomQuoteFromFile() {
         if (this.quotes == null || this.quotes.isEmpty()) {
             return null;
         }

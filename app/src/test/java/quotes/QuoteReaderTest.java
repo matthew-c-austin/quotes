@@ -32,8 +32,8 @@ public class QuoteReaderTest {
     }
 
     @Test
-    void testGetRandomQuote() throws IOException{
-        Quote quote = sut.getRandomQuote();
+    void testGetRandomQuoteFromFile() throws IOException{
+        Quote quote = sut.getRandomQuoteFromFile();
         assertNotNull(quote);
         String expectedAuthor = "Louis Armstrong";
         String expectedText = "What we play is life.";
