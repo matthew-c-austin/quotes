@@ -32,16 +32,12 @@ public class QuoteReaderTest {
     }
 
     @Test
-    void testGetRandomQuote() {
-        Quote quote = sut.getRandomQuote();
+    void testGetRandomQuoteFromFile() throws IOException{
+        Quote quote = sut.getRandomQuoteFromFile();
         assertNotNull(quote);
-        String[] expectedTags = {"trumpet-gods"};
         String expectedAuthor = "Louis Armstrong";
-        String expectedLikes = "23 likes";
         String expectedText = "What we play is life.";
-        assertArrayEquals(expectedTags, quote.getTags());
         assertEquals(expectedAuthor, quote.getAuthor());
-        assertEquals(expectedLikes, quote.getLikes());
         assertEquals(expectedText, quote.getText());
 
         System.out.println(ANSI_GREEN + "testGetRandomQuote() - test passed successfully" + ANSI_RESET);
@@ -49,11 +45,9 @@ public class QuoteReaderTest {
 
     @Test
     void testReadQuotes() throws IOException{
-        String[] tags = {"trumpet-gods"};
         String author = "Louis Armstrong";
-        String likes = "23 likes";
         String text = "What we play is life.";
-        Quote expectedQuote = new Quote(tags,author,likes,text);
+        Quote expectedQuote = new Quote(author, text);
         List<Quote> expectedQuotes = new ArrayList<>();
         expectedQuotes.add(expectedQuote);
         expectedQuotes.add(expectedQuote);
@@ -67,14 +61,10 @@ public class QuoteReaderTest {
         assertEquals(expectedQuotes.size(), actualQuotes.size());
 
         for (int i = 0; i < expectedQuotes.size(); i++) {
-            String[] expectedTags = expectedQuotes.get(i).getTags();
             String expectedAuthor = expectedQuotes.get(i).getAuthor();
-            String expectedLikes = expectedQuotes.get(i).getLikes();
             String expectedText = expectedQuotes.get(i).getText();
 
-            assertArrayEquals(expectedTags, actualQuotes.get(i).getTags());
             assertEquals(expectedAuthor, actualQuotes.get(i).getAuthor());
-            assertEquals(expectedLikes, actualQuotes.get(i).getLikes());
             assertEquals(expectedText, actualQuotes.get(i).getText());
         }
 
@@ -89,5 +79,33 @@ public class QuoteReaderTest {
         assertNull(actualQuotes);
 
         System.out.println(ANSI_GREEN + "testReadQuotesInvalidFileContentReturnsNull() - test passed successfully" + ANSI_RESET);
+    }
+
+    @Test
+    void testCacheQuote() throws IOException {
+        File filePath = new File("src/test/resources/cacheTestQuotes.json");
+        QuoteReader sut = new QuoteReader(filePath);
+        String author = "Louis Armstrong";
+        String text = "What we play is life.";
+        Quote quote = new Quote(author,text);
+        sut.cacheQuote(quote);
+
+        QuoteReader expectedQuoteReader = new QuoteReader(filePath);
+
+        List<Quote> actualQuotes = sut.getQuotes();
+        List<Quote> expectedQuotes = expectedQuoteReader.getQuotes();
+
+        assertEquals(expectedQuotes.size(), actualQuotes.size());
+
+        for (int i = 0; i < expectedQuotes.size(); i++) {
+            String expectedAuthor = expectedQuotes.get(i).getAuthor();
+            System.out.println(expectedAuthor);
+            String expectedText = expectedQuotes.get(i).getText();
+            System.out.println(expectedText);
+            assertEquals(expectedAuthor, actualQuotes.get(i).getAuthor());
+            assertEquals(expectedText, actualQuotes.get(i).getText());
+        }
+
+        System.out.println(ANSI_GREEN + "testCacheQuote() - test passed successfully" + ANSI_RESET);
     }
 }

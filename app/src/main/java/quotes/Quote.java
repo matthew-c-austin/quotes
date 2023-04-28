@@ -1,44 +1,34 @@
 package quotes;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Quote
 {
     // Fields
-    private String[] tags;
+    @SerializedName(value = "author", alternate = "quoteAuthor")
     private String author;
-    private String likes;
+    @SerializedName(value = "text", alternate = "quoteText")
     private String text;
 
-    // Constructor
-    public Quote(String[] tags, String author, String likes, String text) {
-        this.tags = tags;
+    // Constructor for the .json files
+    public Quote(String author, String text) {
         this.author = author;
-        this.likes = likes;
         this.text = text;
     }
 
+    // Constructor for the Formismatic API. We are forced to use more parameters in the constructor because were we to use the same number and type as the .json version, the compiler has no way of differentiating, even though we don't use the rest of the parameters.
+    public Quote(String quoteText, String quoteAuthor, String senderName, String senderLink, String quoteLink) {
+        this.author = quoteAuthor;
+        this.text = quoteText;
+    }
+
     // Getters and Setters
-    public String[] getTags() {
-        return tags;
-    }
-
-    public void setTags(String[] tags) {
-        this.tags = tags;
-    }
-
     public String getAuthor() {
         return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getLikes() {
-        return likes;
-    }
-
-    public void setLikes(String likes) {
-        this.likes = likes;
     }
 
     public String getText() {
